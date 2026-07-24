@@ -268,12 +268,12 @@
 
     <!-- ================= VÍDEO (VSL) ================= -->
     <div class="video-wrapper" id="videoWrapper">
-      <vturb-smartplayer id="vid-6a46c8e20a3de5976280017d" style="display: block; margin: 0 auto; width: 100%;">
+      <vturb-smartplayer id="vid-6a63b4783059c2c13bc4b593" style="display: block; margin: 0 auto; width: 100%;">
         <div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"></div>
       </vturb-smartplayer>
       <script type="text/javascript">
         var s=document.createElement("script");
-        s.src="https://scripts.converteai.net/c4f60ef0-a973-48f0-9aa7-a0b7bb3189e4/players/6a46c8e20a3de5976280017d/v4/player.js";
+        s.src="https://scripts.converteai.net/ec9e40da-89b3-4768-b976-bc6e9a861827/players/6a63b4783059c2c13bc4b593/v4/player.js";
         s.async=!0;
         document.head.appendChild(s);
       </script>
@@ -291,14 +291,6 @@
         <h3>Garantia de 7 dias</h3>
         <p>Se não sentir resultados, devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia.</p>
       </div>
-    </div>
-
-    <!-- ================= BOTÃO DE COMPRA (oculto até o pitch) ================= -->
-    <div class="buy-button-wrap" id="buyButtonWrap">
-      <button class="buy-button" onclick="window.location.href='#'">
-        QUERO ACESSAR AGORA
-        <small>Acesso imediato após a confirmação</small>
-      </button>
     </div>
 
     <!-- ================= FAQ ================= -->
@@ -395,28 +387,7 @@
       clearInterval(countdownInterval);
       document.getElementById('videoWrapper').style.display = 'none';
       document.getElementById('videoExpired').classList.add('show');
-      document.getElementById('buyButtonWrap').classList.remove('show');
     }
-
-    // ============ EXIBIÇÃO DO BOTÃO DE COMPRA ============
-    // O ideal é conectar isto ao evento real do player Vturb quando o pitch começa.
-    // Caso a Vturb dispare um evento customizado (ex: 'converteAI:pitch'), substitua o
-    // listener abaixo pelo evento real. Como alternativa segura, uso um tempo estimado.
-    var SEGUNDOS_ATE_O_PITCH = 180; // ajuste para o minuto exato em que o pitch começa no seu vídeo (deve ser < 300s = 5min)
-
-    setTimeout(function(){
-      if(tempoRestante > 0){
-        document.getElementById('buyButtonWrap').classList.add('show');
-      }
-    }, SEGUNDOS_ATE_O_PITCH * 1000);
-
-    // Se souber o nome exato do evento disparado pelo player Vturb/ConverteAI,
-    // pode substituir o setTimeout acima por algo como:
-    // window.addEventListener('converteai:player:event', function(e){
-    //   if (e.detail && e.detail.type === 'pitch_start') {
-    //     document.getElementById('buyButtonWrap').classList.add('show');
-    //   }
-    // });
 
     // ============ TOGGLE DO FAQ ============
     function toggleFaq(btn){
