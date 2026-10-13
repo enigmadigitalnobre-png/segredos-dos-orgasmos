@@ -1,400 +1,323 @@
-<!DOCTYPE html>
-<html lang="pt-PT">
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Descubra o Método</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0b0b0b;
-    --gold:#d4af37;
-    --gold-light:#f0d878;
-    --green:#25c26e;
-    --green-dark:#1a9d57;
-    --text:#f2f2f2;
-    --text-muted:#b8b8b8;
-    --card:#151515;
-    --border:#2a2a2a;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Poppins', sans-serif;
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{text-decoration:none; color:inherit;}
-  img{max-width:100%; display:block;}
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Segredo do Pau de Cavalo</title>
 
-  /* ===== BARRA DE URGÊNCIA ===== */
-  .urgency-bar{
-    background:linear-gradient(90deg, #7a0000, #b30000);
-    color:#fff;
-    text-align:center;
-    padding:10px 14px;
-    font-size:14px;
-    font-weight:600;
-    letter-spacing:.3px;
-  }
-  .urgency-bar .timer{
-    display:inline-block;
-    margin-top:4px;
-    font-size:18px;
-    font-weight:800;
-    letter-spacing:1px;
-    background:rgba(0,0,0,.25);
-    padding:4px 14px;
-    border-radius:6px;
-  }
+  <!-- Meta Pixel Code -->
+  <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1618436803414301');fbq('track', 'PageView');</script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1618436803414301&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel Code -->
 
-  /* ===== CONTAINER GERAL ===== */
-  .container{
-    max-width:760px;
-    margin:0 auto;
-    padding:28px 18px 60px;
-  }
+  <!-- Meta Conversions API -->
+  <script>
+    var META_PIXEL_ID = '1618436803414301';
+    var META_ACCESS_TOKEN = 'EAAR97nuNg0kBRpIZCuRWmUTelM8rRYuYnz7MhLdoxbludzVwK975O1G2aVQJ2YPA0rBVfzX5KcI1FnUQcaUFop43ciH063buAw5MedA6Ac4TmFhrWlCyUjV0r0ZBZCv6bLEy8gEItrjXuOlhD1w5RucHlKX9vnsM29P9ujZCXMJvZBWUwAmCYKPCiqugzRxOU8AZDZD';
 
-  /* ===== HEADLINE ===== */
-  .headline{
-    text-align:center;
-    font-size:26px;
-    font-weight:800;
-    line-height:1.35;
-    margin-bottom:10px;
-    color:#fff;
-  }
-  .headline span{color:var(--gold-light);}
-  .subheadline{
-    text-align:center;
-    color:var(--text-muted);
-    font-size:15.5px;
-    font-weight:500;
-    margin-bottom:26px;
-  }
+    function generateEventId() {
+      return 'ev_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
 
-  /* ===== VIDEO / VSL ===== */
-  .video-wrapper{
-    border:1px solid var(--border);
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:0 0 40px rgba(212,175,55,.08);
-    margin-bottom:10px;
-  }
-  .audio-note{
-    text-align:center;
-    font-size:13.5px;
-    color:var(--gold-light);
-    margin:10px 0 30px;
-    font-weight:500;
-  }
+    function getClientUserData() {
+      return {
+        client_ip_address: null,
+        client_user_agent: navigator.userAgent,
+        fbc: getCookie('_fbc') || null,
+        fbp: getCookie('_fbp') || null
+      };
+    }
 
-  /* ===== BOTÃO DE COMPRA ===== */
-  .buy-button-wrap{
-    text-align:center;
-    max-height:0;
-    overflow:hidden;
-    opacity:0;
-    transition:max-height .6s ease, opacity .6s ease, margin .6s ease;
-    margin:0;
-  }
-  .buy-button-wrap.show{
-    max-height:200px;
-    opacity:1;
-    margin:0 0 36px;
-  }
-  .buy-button{
-    display:inline-block;
-    background:linear-gradient(180deg, var(--green), var(--green-dark));
-    color:#fff;
-    font-weight:700;
-    font-size:17px;
-    padding:18px 34px;
-    border-radius:10px;
-    border:none;
-    cursor:pointer;
-    box-shadow:0 6px 0 #157a44, 0 10px 25px rgba(37,194,110,.35);
-    animation:pulse 1.8s infinite;
-    width:100%;
-    max-width:420px;
-  }
-  .buy-button small{
-    display:block;
-    font-weight:500;
-    font-size:12.5px;
-    opacity:.9;
-    margin-top:4px;
-  }
-  @keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.03);}
-    100%{transform:scale(1);}
-  }
+    function getCookie(name) {
+      var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+      return v ? v[2] : null;
+    }
 
-  /* ===== RODAPÉ ===== */
-  footer{
-    text-align:center;
-    padding:30px 18px 50px;
-    border-top:1px solid var(--border);
-    margin-top:20px;
-  }
-  .footer-badges{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:18px;
-    margin-bottom:16px;
-    font-size:13px;
-    color:var(--text-muted);
-  }
-  .footer-badges span{display:flex; align-items:center; gap:6px;}
-  footer p{font-size:12px; color:#666;}
+    function sendConversionsAPI(eventName, customData) {
+      var eventId = generateEventId();
+      var userData = getClientUserData();
+      var payload = {
+        data: [{
+          event_name: eventName,
+          event_time: Math.floor(Date.now() / 1000),
+          event_id: eventId,
+          event_source_url: window.location.href,
+          action_source: 'website',
+          user_data: userData,
+          custom_data: customData || {}
+        }]
+      };
 
-  /* ===== GARANTIA ===== */
-  .guarantee{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    background:var(--card);
-    border:1px solid var(--gold);
-    border-radius:12px;
-    padding:20px;
-    margin:34px 0;
-  }
-  .guarantee-badge{
-    width:64px;
-    height:64px;
-    flex-shrink:0;
-    border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, var(--gold-light), var(--gold));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-  }
-  .guarantee-text h3{
-    font-size:16.5px;
-    color:#fff;
-    margin-bottom:4px;
-  }
-  .guarantee-text p{
-    font-size:13.5px;
-    color:var(--text-muted);
-  }
+      fetch('https://graph.facebook.com/v19.0/' + META_PIXEL_ID + '/events?access_token=' + META_ACCESS_TOKEN, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(function(err) { console.warn('Conversions API error:', err); });
 
-  /* ===== FAQ ===== */
-  .faq-title{
-    text-align:center;
-    font-size:19px;
-    font-weight:700;
-    color:#fff;
-    margin:40px 0 18px;
-  }
-  .faq-item{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:10px;
-    margin-bottom:10px;
-    overflow:hidden;
-  }
-  .faq-question{
-    width:100%;
-    text-align:left;
-    background:none;
-    border:none;
-    color:#fff;
-    font-family:'Poppins', sans-serif;
-    font-size:14.5px;
-    font-weight:600;
-    padding:16px 18px;
-    cursor:pointer;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-  }
-  .faq-question .icon{
-    color:var(--gold-light);
-    font-size:18px;
-    transition:transform .25s ease;
-    flex-shrink:0;
-  }
-  .faq-item.open .faq-question .icon{transform:rotate(45deg);}
-  .faq-answer{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .3s ease;
-    padding:0 18px;
-  }
-  .faq-item.open .faq-answer{
-    max-height:200px;
-    padding:0 18px 16px;
-  }
-  .faq-answer p{
-    font-size:13.5px;
-    color:var(--text-muted);
-  }
+      return eventId;
+    }
 
-  /* ===== VÍDEO EXPIRADO ===== */
-  .video-expired{
-    display:none;
-    text-align:center;
-    padding:50px 20px;
-    background:#111;
-    border-radius:10px;
-  }
-  .video-expired.show{display:block;}
-  .video-expired h3{color:#fff; font-size:17px; margin-bottom:8px;}
-  .video-expired p{color:var(--text-muted); font-size:14px;}
-</style>
+    // Disparo duplo: Pixel + API de Conversão
+    function trackEvent(eventName, customData) {
+      var eventId = sendConversionsAPI(eventName, customData);
+      if (typeof fbq !== 'undefined') {
+        fbq('track', eventName, customData || {}, { eventID: eventId });
+      }
+    }
+  </script>
+  <!-- End Meta Conversions API -->
+
+  <script>
+    !function (w, p) {
+      w._plt = w._plt || (p && p.timeOrigin ? p.timeOrigin + p.now() : Date.now());
+    }(window, performance);
+  </script>
+
+
+
+
+
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet"/>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--red:#d90429;--yellow:#f5c200;--fb-blue:#1877f2;--sub:#65676b;--border:#e4e6ea;--bg-reply:#f0f2f5}
+    body{font-family:"Lato",sans-serif;background:#fff;color:#1c1c1c;max-width:680px;margin:0 auto}
+    /* BARRA VERMELHA */
+    .top-bar-red{background:#c0000e;color:#fff;text-align:center;padding:12px 16px;font-family:"Oswald",sans-serif;}
+    .top-bar-title{font-size:15px;font-weight:700;letter-spacing:.3px;margin-bottom:8px;}
+    .top-bar-timer{font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;}
+    .timer-box{background:#fff;color:#000;font-weight:900;font-size:18px;padding:4px 14px;border-radius:4px;font-family:"Oswald",sans-serif;letter-spacing:2px;}
+
+    /* HEADLINE */
+    .headline{background:#000;color:#fff;padding:14px 18px;text-align:center;font-family:"Oswald",sans-serif;font-size:18px;font-weight:700;line-height:1.55;word-spacing:2px;}
+    .hl-box{background:#c0000e;color:#fff;padding:2px 8px;border-radius:3px;}
+    .hl-circle{border:2px solid #c0000e;color:#fff;padding:1px 7px;border-radius:50px;}
+    .hl-underline{border-bottom:2px solid #c0000e;padding-bottom:1px;}
+
+    /* SETAS */
+    .arrows{background:#000;display:flex;justify-content:space-between;padding:4px 32px 8px;}
+    .arrow{color:#c0000e;font-size:36px;line-height:1;}
+
+    /* VIDEO Vturb */
+    .video-wrap{background:#000;width:100%;margin:0 auto;}
+    .video-wrap vturb-smartplayer{display:block;width:100%;}
+    
+    .headline {
+      background: #000;
+      color: #fff;
+      padding: 10px 15px;
+      text-align: center;
+      font-family: "Oswald", sans-serif;
+      font-size: 15px;
+      line-height: 1.3;
+      margin-bottom: 0;
+      position: static;
+    }
+    .headline .highlight-red { background: #d90429; padding: 2px 6px; border-radius: 4px; }
+    
+    .video-wrap{background:#000;width:100%;}
+    .video-wrap hostvsl-player{display:block;width:100%;}
+
+    .strip-online{background:#fffbe6;border-top:2.5px solid var(--yellow);border-bottom:2.5px solid var(--yellow);text-align:center;padding:9px 12px;font-size:13px;color:#555;display:flex;align-items:center;justify-content:center;gap:8px}
+    .blink{width:9px;height:9px;background:#e67e00;border-radius:50%;animation:blink 1.4s infinite;flex-shrink:0}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+    .comments-wrap{padding:0 0 32px;margin-top:0}
+    .comments-head{padding:16px 16px 8px;border-bottom:1px solid var(--border)}
+    .comments-head h2{font-size:17px;font-weight:900;color:#111}
+    .comments-head span{font-size:12.5px;color:var(--sub);display:block;margin-top:2px}
+    .c{display:flex;gap:10px;align-items:flex-start;padding:13px 16px;border-bottom:1px solid var(--border)}
+    .av{width:38px;height:38px;border-radius:50%;flex-shrink:0;overflow:hidden;object-fit:cover}
+    .c.reply .av{width:32px;height:32px}
+    .bubble{background:var(--bg-reply);border-radius:0 14px 14px 14px;padding:9px 13px 8px;flex:1}
+    .c.main .bubble{background:transparent;padding:0}
+    .c-name{font-size:13.5px;font-weight:900;color:#111;margin-bottom:3px}
+    .c.reply .c-name{color:var(--fb-blue)}
+    .c-text{font-size:14px;line-height:1.58;color:#222}
+    .c-text .brand{color:#1a7a1a;font-weight:700}
+    .c-text .mention{color:var(--fb-blue);font-weight:700}
+    .reply-label{font-size:11.5px;color:var(--sub);margin-bottom:4px;display:flex;align-items:center;gap:4px}
+    .reply-label::before{content:"↩";font-size:11px;opacity:.6}
+    .c-actions{display:flex;align-items:center;gap:14px;margin-top:7px}
+    .c-actions span{font-size:12px;color:var(--sub);cursor:pointer;font-weight:700}
+    .like{display:flex;align-items:center;gap:4px}
+    .like svg{width:16px;height:16px;stroke:var(--sub);fill:none;stroke-width:2}
+    .dot{font-size:4px;color:var(--sub);line-height:1}
+    .see-more{font-size:13px;color:var(--fb-blue);font-weight:700;padding:8px 16px 10px;cursor:pointer;display:flex;align-items:center;gap:5px}
+    .see-more::before{content:"▸";font-size:10px}
+    .end-space{height:48px}
+  </style>
 </head>
 <body>
 
-  <!-- ================= BARRA DE URGÊNCIA ================= -->
-  <div class="urgency-bar">
-    🔴 Esta oferta especial pode ser encerrada em breve<br>
-    <span class="timer" id="countdown">--:--:--</span>
-  </div>
+<!-- BARRA VERMELHA TOPO -->
+<div class="top-bar-red">
+  <div class="top-bar-title">⚠ ATENÇÃO: ESTE VÍDEO PODE SAIR DO AR A QUALQUER MOMENTO</div>
+  <div class="top-bar-timer">Tempo restante: <span class="timer-box" id="timer">03:40</span></div>
+</div>
 
-  <div class="container">
+<!-- HEADLINE -->
+<div class="headline">
+  DURE MAIS DE <span class="hl-box">40 MINUTOS</span> NA <span class="hl-circle">CAMA</span> COM ESTA
+  <span class="hl-underline">TÉCNICA</span> <span class="hl-circle">SECRETA</span> E FAZ QUALQUER MULHER
+  <span class="hl-underline">TREMER, GRITAR E</span> <span class="hl-box">IMPLORAR</span> POR MAIS!
+</div>
 
-    <!-- ================= HEADLINE ================= -->
-    <h1 class="headline">
-      Descubra o método que está ajudando milhares de homens a recuperarem a <span>firmeza</span>, durarem mais tempo na cama e voltarem a satisfazer as suas parceiras
-    </h1>
-    <p class="subheadline">Mesmo que já tenha tentado outros métodos sem sucesso.</p>
+<!-- SETAS -->
+<div class="arrows">
+  <span class="arrow">⬇</span>
+  <span class="arrow">⬇</span>
+</div>
 
-    <!-- ================= VÍDEO (VSL) ================= -->
-    <div class="video-wrapper" id="videoWrapper">
-      <vturb-smartplayer id="vid-6a63b4783059c2c13bc4b593" style="display: block; margin: 0 auto; width: 100%;">
-        <div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"></div>
-      </vturb-smartplayer>
-      <script type="text/javascript">
-        var s=document.createElement("script");
-        s.src="https://scripts.converteai.net/ec9e40da-89b3-4768-b976-bc6e9a861827/players/6a63b4783059c2c13bc4b593/v4/player.js";
-        s.async=!0;
-        document.head.appendChild(s);
-      </script>
-    </div>
-    <div class="video-expired" id="videoExpired">
-      <h3>⏱️ O tempo desta oferta terminou</h3>
-      <p>O vídeo já não está disponível nesta sessão.</p>
-    </div>
-    <p class="audio-note">🔊 Utilize fones de ouvido e assista até o final. Informações importantes serão reveladas nos minutos finais.</p>
-
-    <!-- ================= GARANTIA ================= -->
-    <div class="guarantee">
-      <div class="guarantee-badge">🛡️</div>
-      <div class="guarantee-text">
-        <h3>Garantia de 7 dias</h3>
-        <p>Se não sentir resultados, devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia.</p>
-      </div>
-    </div>
-
-    <!-- ================= FAQ ================= -->
-    <h2 class="faq-title">Perguntas Frequentes</h2>
-
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Como recebo o produto?
-        <span class="icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>O acesso é imediato: assim que o pagamento for confirmado, você recebe tudo diretamente no seu celular. São aulas práticas em vídeo, disponíveis para assistir quando e onde quiser.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Funciona para qualquer idade?
-        <span class="icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>[Responda aqui com informação real sobre faixa etária/indicações do produto.]</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        É discreto? Vou receber em embalagem sigilosa?
-        <span class="icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>[Descreva aqui a política real de envio/discrição, se aplicável.]</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Em quanto tempo posso ver resultados?
-        <span class="icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>[Informe aqui o prazo real esperado, com base em dados verdadeiros do produto.]</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        E se eu não gostar do resultado?
-        <span class="icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>Você está protegido pela nossa garantia de 7 dias. Se não sentir os resultados, devolvemos o seu dinheiro.</p>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ================= RODAPÉ ================= -->
-  <footer>
-    <div class="footer-badges">
-      <span>🔒 Compra 100% segura</span>
-      <span>💳 Pagamento protegido</span>
-      <span>⚡ Acesso imediato</span>
-      <span>🎧 Suporte ao cliente</span>
-    </div>
-    <p>© 2026 — Todos os direitos reservados.</p>
-  </footer>
-
-  <script>
-    // ============ CONTADOR DA SESSÃO (5 minutos, real — o vídeo desaparece ao zerar) ============
-    // Este contador conta a partir do momento em que o visitante entra na página.
-    // Ao chegar a zero, o vídeo é REALMENTE removido (substituído pelo aviso abaixo),
-    // então a urgência mostrada é verdadeira e não apenas visual.
-    var DURACAO_SESSAO_SEGUNDOS = 5 * 60; // 5 minutos
-    var tempoRestante = DURACAO_SESSAO_SEGUNDOS;
-
-    function updateCountdown(){
-      var el = document.getElementById('countdown');
-      if(tempoRestante <= 0){
-        el.textContent = "00:00";
-        expirarVideo();
-        return;
-      }
-      var m = Math.floor(tempoRestante / 60);
-      var s = tempoRestante % 60;
-      el.textContent = String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
-      tempoRestante--;
-    }
-
-    var countdownInterval = setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    function expirarVideo(){
-      clearInterval(countdownInterval);
-      document.getElementById('videoWrapper').style.display = 'none';
-      document.getElementById('videoExpired').classList.add('show');
-    }
-
-    // ============ TOGGLE DO FAQ ============
-    function toggleFaq(btn){
-      var item = btn.closest('.faq-item');
-      item.classList.toggle('open');
-    }
+<!-- PLAYER SEM SOBREPOSIÇÃO -->
+<div class="video-wrap">
+  <vturb-smartplayer id="vid-6ace3dbdf6f2219d5a35873f" style="display: block; margin: 0 auto; width: 100%; "><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+  <script type="text/javascript">
+    var s=document.createElement("script");
+    s.src="https://scripts.converteai.net/33b05967-a83a-4008-8801-1f157878592a/players/6ace3dbdf6f2219d5a35873f/v4/player.js";
+    s.async=!0;
+    document.head.appendChild(s);
   </script>
+</div>
 
+<!-- CONTADOR ONLINE -->
+<div class="strip-online">
+  <span class="blink"></span>
+  <span><b id="cnt">612</b> homens estão a assistir esta página agora mesmo</span>
+</div>
+
+<div class="comments-wrap">
+  <div class="comments-head">
+    <h2>Comentários</h2>
+    <span>Mostrando 5 de 150 comentários</span>
+  </div>
+
+  <div class="c main">
+    <img class="av" src="data:image/jpeg;base64,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" alt=""/>
+    <div style="flex:1">
+      <div class="c-name">Mário Nhantumbo</div>
+      <div class="c-text">Cara, eu estava a perder a minha mulher em silêncio e nem sabia. Ela nunca reclamou mas eu sentia. Tentei de tudo — vitaminas, academia, aquelas coisas que vendem na rua. Nada. Quando encontrei o <span class="brand">Segredo do Pau de Cavalo</span> pensei que era mais uma mentira. Resolvi arriscar. Em duas semanas a diferença foi tão grande que ela própria me disse: "o que aconteceu contigo?" 😂 Sinto que recuperei uma coisa que não sabia que tinha perdido.</div>
+      <div class="c-actions">
+        <span class="like" onclick="toggleLike(this)"><svg viewBox="0 0 24 24"><path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3m7-10l-4 4h3v6h2v-6h3l-4-4z"/></svg><span>47</span></span>
+        <span>Responder</span><span class="dot">●</span><span>2 h</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="c reply">
+    <img class="av" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCABQAFADASIAAhEBAxEB/8QAHAAAAAcBAQAAAAAAAAAAAAAAAAECBAUGBwMI/8QAMBAAAQMCBQMBBwQDAAAAAAAAAQACAwQRBRIhMUEGE1FhFCIycYGRsSOhwfBicvH/xAAYAQEAAwEAAAAAAAAAAAAAAAAAAQIDBP/EABsRAQEBAQEAAwAAAAAAAAAAAAABEQIhAzEy/9oADAMBAAIRAxEAPwC8owiRhQDAR2RgJni2K0WD0vtFfMI2nRo3Lj4A5QO7IWI4Wa9Q9fSVdKyHCjLTOzHPINCRxbwq9R9S4zSTmWPEZ7k+9ndmB51B0QbZZFZRPTWOxY7h/dADJ4zlljvz5HoVMWQIsislFEgKyMIIBAsEAXOwWO9U4ice6oMcbz2GvMbNeBuVrtW7t0U77XyxuP7LHcEi71TVymzXxkhrrX3vpf6Jbk1PM24kI6Cn7OSONobbfe/1VaxGn9lq3sb8O4+StXcmYyVxIc5x0yNAH28/JQ+OsEobK2KRmUWOd2a49Cs+b627/P0V0rismF4zBO1xET3Bkg8tK2k2tobhef6fWwHkflblg0/tGE0zz8XbANz4C0YHaCBQQEjCJGECamMy0c0bQCXRuaL7ahY9h7XQvrqS36gfmAPPC2W/HlZ51HhrKXGp6yC3bsG2aNiSND+Pso69i3FymD3llOXCrilZvkabPaf9SL/YpjjUjp6eK4+HUhdn1kbb2hdnPgKv4lUVE1UBqA0aNGqz5m10fJ1JCaYATAfn6La8DGTCqdhZkswafysXw8Z69n+TgP3C22hY6KBkTjmLGht/Nlq5jooIIIgEmWQRR5jvwEoJlXyZZGg7NtdKQ2qDJM0Oe4ktddR2OZY8IndZpLrMbm21P/VLADLYOB+Ruq51iZo6OmcxxEV3FzeC7S38rO3xpzNqsz0VRC/LJmymwta2/wCfordQYNBRYTE2SFvtDxeQ5QSb8X5tsnfTGEspKJtXWMa6plALQ8aRg8D1U7H7Mx+a7XO8n+6KJsW6u+KhhHRcba51fVRNZDmJjgcb/U+norjG1pjzNFhf7ro5wqG5GPaRzYgro0BrhfQAWDVbWbkggRleWoK6ogo2uOapcOLgKSChqt9yXhw1N1FTHZ7W3sBa2xC5VFMysh7FRGHx3DtfIN0tr+4xr28i6XFmc7ZQsV3M3AN9zdOqS3AATNrC0AW25TmDM0X5UB1U00Jp3yAWe1pcCN9BfRMqWpkmbG0uIu0FxPrsE8rZWxUby/4bix9D/SoLDpQGN991g4gOI1Ou9vNlAnnjLlIJII58oIhI2WnBZf3TfbhC6vFK/9k=" alt=""/>
+    <div style="flex:1">
+      <div class="bubble">
+        <div class="reply-label">em resposta a Mário Nhantumbo</div>
+        <div class="c-name">Graça Cossa</div>
+        <div class="c-text"><span class="mention">@Mário</span> o meu marido estava na mesma situação. Aquele silêncio entre o casal que toda a gente finge que não existe… Comprei o <span class="brand">Segredo do Pau de Cavalo</span> sem ele saber e deixei o link aberto no telemóvel 😅 Hoje agradeço todos os dias essa decisão. Ele voltou a ser o homem que eu conheci.</div>
+        <div class="c-actions">
+          <span class="like" onclick="toggleLike(this)"><svg viewBox="0 0 24 24"><path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3m7-10l-4 4h3v6h2v-6h3l-4-4z"/></svg><span>31</span></span>
+          <span>Responder</span><span class="dot">●</span><span>1 h</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c main">
+    <img class="av" src="data:image/jpeg;base64,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" alt=""/>
+    <div style="flex:1">
+      <div class="c-name">Domingos Jossias</div>
+      <div class="c-text">Passei anos a achar que o problema era genético. Que era algo que os meus pais me passaram. O <span class="brand">Segredo do Pau de Cavalo</span> mostrou-me que não tinha nada a ver com isso — era só uma questão de método. Hoje tenho 44 anos e desempenho melhor do que quando tinha 28. Não é piada. A minha mulher até perguntou se eu estava a tomar alguma coisa 😄 Disse que não. Só o segredo certo.</div>
+      <div class="c-actions">
+        <span class="like" onclick="toggleLike(this)"><svg viewBox="0 0 24 24"><path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3m7-10l-4 4h3v6h2v-6h3l-4-4z"/></svg><span>38</span></span>
+        <span>Responder</span><span class="dot">●</span><span>3 h</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="c main">
+    <img class="av" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCABQAFADASIAAhEBAxEB/8QAHAAAAAcBAQAAAAAAAAAAAAAAAAECBAUGBwMI/8QAMBAAAQMCBQMBBwQDAAAAAAAAAQACAwQRBRIhMUEGE1FhFCIycYGRsSOhwfBicvH/xAAYAQEAAwEAAAAAAAAAAAAAAAAAAQIDBP/EABsRAQEBAQEAAwAAAAAAAAAAAAABEQIhAzEy/9oADAMBAAIRAxEAPwC8owiRhQDAR2RgJni2K0WD0vtFfMI2nRo3Lj4A5QO7IWI4Wa9Q9fSVdKyHCjLTOzHPINCRxbwq9R9S4zSTmWPEZ7k+9ndmB51B0QbZZFZRPTWOxY7h/dADJ4zlljvz5HoVMWQIsislFEgKyMIIBAsEAXOwWO9U4ice6oMcbz2GvMbNeBuVrtW7t0U77XyxuP7LHcEi71TVymzXxkhrrX3vpf6Jbk1PM24kI6Cn7OSONobbfe/1VaxGn9lq3sb8O4+StXcmYyVxIc5x0yNAH28/JQ+OsEobK2KRmUWOd2a49Cs+b627/P0V0rismF4zBO1xET3Bkg8tK2k2tobhef6fWwHkflblg0/tGE0zz8XbANz4C0YHaCBQQEjCJGECamMy0c0bQCXRuaL7ahY9h7XQvrqS36gfmAPPC2W/HlZ51HhrKXGp6yC3bsG2aNiSND+Pso69i3FymD3llOXCrilZvkabPaf9SL/YpjjUjp6eK4+HUhdn1kbb2hdnPgKv4lUVE1UBqA0aNGqz5m10fJ1JCaYATAfn6La8DGTCqdhZkswafysXw8Z69n+TgP3C22hY6KBkTjmLGht/Nlq5jooIIIgEmWQRR5jvwEoJlXyZZGg7NtdKQ2qDJM0Oe4ktddR2OZY8IndZpLrMbm21P/VLADLYOB+Ruq51iZo6OmcxxEV3FzeC7S38rO3xpzNqsz0VRC/LJmymwta2/wCfordQYNBRYTE2SFvtDxeQ5QSb8X5tsnfTGEspKJtXWMa6plALQ8aRg8D1U7H7Mx+a7XO8n+6KJsW6u+KhhHRcba51fVRNZDmJjgcb/U+norjG1pjzNFhf7ro5wqG5GPaRzYgro0BrhfQAWDVbWbkggRleWoK6ogo2uOapcOLgKSChqt9yXhw1N1FTHZ7W3sBa2xC5VFMysh7FRGHx3DtfIN0tr+4xr28i6XFmc7ZQsV3M3AN9zdOqS3AATNrC0AW25TmDM0X5UB1U00Jp3yAWe1pcCN9BfRMqWpkmbG0uIu0FxPrsE8rZWxUby/4bix9D/SoLDpQGN991g4gOI1Ou9vNlAnnjLlIJII58oIhI2WnBZf3TfbhC6vFK/9k=" alt=""/>
+    <div style="flex:1">
+      <div class="c-name">Fátima Cossa</div>
+      <div class="c-text">Alguém pode me dizer com honestidade — isto funciona mesmo? O meu marido já tentou tantas coisas e gastámos dinheiro sem resultado. Ele já nem fala mais no assunto mas eu vejo que isso o afecta muito. Tenho medo de lhe mostrar e ele desanimar de novo se não funcionar...</div>
+      <div class="c-actions">
+        <span class="like" onclick="toggleLike(this)"><svg viewBox="0 0 24 24"><path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3m7-10l-4 4h3v6h2v-6h3l-4-4z"/></svg><span>54</span></span>
+        <span>Responder</span><span class="dot">●</span><span>1 h</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="c reply">
+    <img class="av" src="data:image/jpeg;base64,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" alt=""/>
+    <div style="flex:1">
+      <div class="bubble">
+        <div class="reply-label">em resposta a Fátima Cossa</div>
+        <div class="c-name">Arnaldo Paunde</div>
+        <div class="c-text"><span class="mention">@Fátima</span> a minha mulher disse exactamente o que tu disseste — palavra por palavra. Eu estava tão desanimado que já nem queria tentar. Foi ela que me mandou o link do <span class="brand">Segredo do Pau de Cavalo</span>. Decidi tentar só para não a decepcionar. O resultado chegou mais rápido do que esperava. Mostra ao teu marido. Sério. Ele vai te agradecer. 🙏</div>
+        <div class="c-actions">
+          <span class="like" onclick="toggleLike(this)"><svg viewBox="0 0 24 24"><path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3m7-10l-4 4h3v6h2v-6h3l-4-4z"/></svg><span>29</span></span>
+          <span>Responder</span><span class="dot">●</span><span>45 min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c reply">
+    <img class="av" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCABQAFADASIAAhEBAxEB/8QAHAAAAAcBAQAAAAAAAAAAAAAAAAECBAUGBwMI/8QAMBAAAQMCBQMBBwQDAAAAAAAAAQACAwQRBRIhMUEGE1FhFCIycYGRsSOhwfBicvH/xAAYAQEAAwEAAAAAAAAAAAAAAAAAAQIDBP/EABsRAQEBAQEAAwAAAAAAAAAAAAABEQIhAzEy/9oADAMBAAIRAxEAPwC8owiRhQDAR2RgJni2K0WD0vtFfMI2nRo3Lj4A5QO7IWI4Wa9Q9fSVdKyHCjLTOzHPINCRxbwq9R9S4zSTmWPEZ7k+9ndmB51B0QbZZFZRPTWOxY7h/dADJ4zlljvz5HoVMWQIsislFEgKyMIIBAsEAXOwWO9U4ice6oMcbz2GvMbNeBuVrtW7t0U77XyxuP7LHcEi71TVymzXxkhrrX3vpf6Jbk1PM24kI6Cn7OSONobbfe/1VaxGn9lq3sb8O4+StXcmYyVxIc5x0yNAH28/JQ+OsEobK2KRmUWOd2a49Cs+b627/P0V0rismF4zBO1xET3Bkg8tK2k2tobhef6fWwHkflblg0/tGE0zz8XbANz4C0YHaCBQQEjCJGECamMy0c0bQCXRuaL7ahY9h7XQvrqS36gfmAPPC2W/HlZ51HhrKXGp6yC3bsG2aNiSND+Pso69i3FymD3llOXCrilZvkabPaf9SL/YpjjUjp6eK4+HUhdn1kbb2hdnPgKv4lUVE1UBqA0aNGqz5m10fJ1JCaYATAfn6La8DGTCqdhZkswafysXw8Z69n+TgP3C22hY6KBkTjmLGht/Nlq5jooIIIgEmWQRR5jvwEoJlXyZZGg7NtdKQ2qDJM0Oe4ktddR2OZY8IndZpLrMbm21P/VLADLYOB+Ruq51iZo6OmcxxEV3FzeC7S38rO3xpzNqsz0VRC/LJmymwta2/wCfordQYNBRYTE2SFvtDxeQ5QSb8X5tsnfTGEspKJtXWMa6plALQ8aRg8D1U7H7Mx+a7XO8n+6KJsW6u+KhhHRcba51fVRNZDmJjgcb/U+norjG1pjzNFhf7ro5wqG5GPaRzYgro0BrhfQAWDVbWbkggRleWoK6ogo2uOapcOLgKSChqt9yXhw1N1FTHZ7W3sBa2xC5VFMysh7FRGHx3DtfIN0tr+4xr28i6XFmc7ZQsV3M3AN9zdOqS3AATNrC0AW25TmDM0X5UB1U00Jp3yAWe1pcCN9BfRMqWpkmbG0uIu0FxPrsE8rZWxUby/4bix9D/SoLDpQGN991g4gOI1Ou9vNlAnnjLlIJII58oIhI2WnBZf3TfbhC6vFK/9k=" alt=""/>
+    <div style="flex:1">
+      <div class="bubble">
+        <div class="reply-label">em resposta a Arnaldo Paunde</div>
+        <div class="c-name">Fátima Cossa</div>
+        <div class="c-text"><span class="mention">@Arnaldo</span> obrigada mesmo. Acabei de mandar o link para ele. Disse que era surpresa. Que Deus abençoe quem criou isto 🙏❤️</div>
+        <div class="c-actions">
+          <span class="like" onclick="toggleLike(this)"><svg viewBox="0 0 24 24"><path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3m7-10l-4 4h3v6h2v-6h3l-4-4z"/></svg><span>22</span></span>
+          <span>Responder</span><span class="dot">●</span><span>30 min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="see-more">Ver mais 145 comentários</div>
+  <div class="end-space"></div>
+</div>
+
+<script>
+  // PageView já disparado pelo Pixel no <head>
+  // Disparo duplo via Conversions API
+  sendConversionsAPI('PageView');
+
+  let tracked = {vc:false, atc:false, ic:false};
+  window.addEventListener("scroll", () => {
+    const pos = window.scrollY / document.body.scrollHeight;
+    if (!tracked.vc && pos > 0.25) { trackEvent('ViewContent'); tracked.vc = true; }
+    if (!tracked.atc && pos > 0.45) { trackEvent('AddToCart'); tracked.atc = true; }
+    if (!tracked.ic && pos > 0.70) { trackEvent('InitiateCheckout'); tracked.ic = true; }
+  });
+
+  setTimeout(() => trackEvent('Lead'), 45000);
+
+  // Timer regressivo
+  (function(){
+    var total = 3*60+40;
+    function tick(){
+      if(total<=0){total=0;}
+      var m=Math.floor(total/60), s=total%60;
+      var el=document.getElementById('timer');
+      if(el) el.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+      if(total>0){total--;setTimeout(tick,1000);}
+    }
+    tick();
+  })();
+
+  let _base=612;
+  setInterval(() => {
+    _base = Math.max(570, _base + (Math.floor(Math.random()*9)-4));
+    document.getElementById("cnt").textContent = _base;
+  }, 5000);
+
+  function toggleLike(el){
+    var s=el.querySelector("span"); var n=parseInt(s.textContent);
+    if(el.dataset.on){ s.textContent=n-1; delete el.dataset.on; el.style.opacity="1"; }
+    else{ s.textContent=n+1; el.dataset.on="1"; el.style.opacity=".7"; }
+  }
+</script>
 </body>
 </html>
